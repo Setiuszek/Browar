@@ -1,6 +1,8 @@
 ﻿namespace Browar.Enties.Ingredients
 {
-    public class Hop
+    public class Hop : Ingredient
     {
+        public int AplhaAcid;
+        public int Oils;
     }
 }
