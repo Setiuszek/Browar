@@ -5,6 +5,7 @@ namespace Browar.Enties
 {
     public class Recipe
     {
+        public String Name;
         List<RecipeHop> RecipeHops;
         List<RecipeMalt> RecipeMalts;
         RecipeYeast Yeast;
@@ -18,14 +19,29 @@ namespace Browar.Enties
         public float Extract { get; set; }
         public int EBC { get; set; }
 
-        public Recipe(List<RecipeHop> recipeHops, List<RecipeMalt> recipeMalts, RecipeYeast yeast, List<MashingTime> mashingScheme, int eBC, int volume, int mashVolume, float extract)
+        public Recipe(String name, List<RecipeHop> recipeHops, List<RecipeMalt> recipeMalts, RecipeYeast yeast, List<MashingTime> mashingScheme, int eBC, int volume, int mashVolume, float extract)
         {
+            Name = name;
+
             RecipeHops = recipeHops;
             RecipeMalts = recipeMalts;
             Yeast = yeast;
             MashingScheme = mashingScheme;
             Volume = volume;
             MashVolume = mashVolume;
+
+            Extract = CalculateExtract();   
+        }
+        public float CalculateExtract()
+        {
+            var sum = 0;
+
+            foreach (RecipeMalt recipeMalt in RecipeMalts)
+            {
+                sum = sum + recipeMalt.Malt.Extractivity * recipeMalt.AmountInRecipe;
+            }
+
+            return sum / Volume;
         }
     }
 }
