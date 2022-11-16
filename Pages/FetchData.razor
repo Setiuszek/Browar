@@ -1,8 +1,8 @@
-﻿@page "/fetchdata"
+﻿@page "/tanks"
 
 <PageTitle>Weather forecast</PageTitle>
 
-@using BlazorApp1.Data
+@using Browar.Data
 @inject WeatherForecastService ForecastService
 
 <h1>Weather forecast</h1>
@@ -43,6 +43,10 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+
+        HttpClient hc = new HttpClient();
+       var response =  hc.GetAsync("localhost:7071/api/tanks/tanks");
+
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
     }
 }

@@ -1,4 +1,4 @@
-namespace BlazorApp1.Data
+namespace Browar.Data
 {
     public class WeatherForecast
     {
