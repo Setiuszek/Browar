@@ -30,30 +30,9 @@ namespace Browar.Enties
             Volume = volume;
             MashVolume = mashVolume;
 
-            Extract = CalculateExtract();   
-        }
-        public float CalculateExtract()
-        {
-            var sum = 0;
-
-            foreach (RecipeMalt recipeMalt in RecipeMalts)
-            {
-                sum = sum + recipeMalt.Malt.Extractivity * recipeMalt.AmountInRecipe;
-            }
-
-            return sum / Volume;
+            Extract = Calc.CalculateExtract(RecipeMalts, Volume);   
+            EBC = Calc.CalculateEBC(RecipeMalts, Volume);
         }
 
-        public int CalculateEBC()
-        {
-            double sum = 0;
-            foreach (RecipeMalt recipeMalt in RecipeMalts)
-            {
-                sum = sum + recipeMalt.Malt.EBC * recipeMalt.AmountInRecipe;
-            }
-            sum = 2.9396 * Math.Pow(sum, 0.6859);
-
-            return (int) sum;
-        }
     }
 }
